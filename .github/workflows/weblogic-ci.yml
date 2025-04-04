@@ -21,6 +21,27 @@ on:
         required: true
         default: "11"
         type: string
+      #Inputs para despliegue en consola Weblogic
+      server_host:
+        description: "Host del servidor WebLogic"
+        required: true
+        type: string
+      server_port:
+        description: "Puerto del servidor WebLogic"
+        required: true
+        type: string
+      weblogic_user:
+        description: "Usuario WebLogic"
+        required: true
+        type: string
+      target_name:
+        description: "Nombre del target WebLogic"
+        required: true
+        type: string
+      app_name:
+        description: "Nombre lógico de la app WebLogic"
+        required: true
+        type: string
 
 jobs:
   BUILD:
