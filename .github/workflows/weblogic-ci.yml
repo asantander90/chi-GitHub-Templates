@@ -14,6 +14,8 @@ on:
         required: true
         type: string
       artifacts_name:
+        description: "Nombre del Ear"
+        default: "HelloWorld"
         required: true
         type: string
       java_version:
@@ -61,7 +63,7 @@ jobs:
     uses: asantander90/chi-GitHub-Functions-main/.github/workflows/deployWeblogic.yml@main
     with:
       artifacts_pattern: ${{ inputs.artifacts_pattern }}
-      artifact_name: ${{ inputs.artifacts_name }}
+      artifacts_name: ${{ inputs.artifacts_name }}
       server_host: ${{ inputs.server_host }}
       server_port: ${{ inputs.server_port }}
       weblogic_user: ${{ inputs.weblogic_user }}
