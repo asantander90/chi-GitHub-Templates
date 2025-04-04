@@ -1,4 +1,4 @@
-name: Template Weblogic
+name: Template Java Weblogic
 
 on:
   workflow_call:
@@ -24,18 +24,22 @@ on:
 
 jobs:
   BUILD:
-    uses: santander-group-chile/chi-GitHub-Functions/.github/workflows/buildAnt.yml@main
+    # Compila el proyecto con Ant y guarda artefactos
+    uses: asantander90/chi-GitHub-Functions/.github/workflows/buildAnt.yml@main
     with:
       java_version: ${{ inputs.java_version }}
       artifacts_pattern: ${{ inputs.artifacts_pattern }}
     secrets: inherit
   SONAR:
     needs: BUILD
-    uses: santander-group-chile/chi-GitHub-Functions/.github/workflows/sonarScan.yml@main
+    uses: asantander90/chi-GitHub-Functions/.github/workflows/sonarScan.yml@main
     secrets: inherit
     
   DEPLOY:
     needs: SONAR
-    uses: santander-group-chile/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
+    uses: asantander90/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
+    with:
+      artifacts_pattern: ${{ inputs.artifacts_pattern }}
+    secrets: inherit
 
 
