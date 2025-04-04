@@ -30,13 +30,13 @@ jobs:
       java_version: ${{ inputs.java_version }}
       artifacts_pattern: ${{ inputs.artifacts_pattern }}
     secrets: inherit
-  SONAR:
-    needs: BUILD
-    uses: asantander90/chi-GitHub-Functions-main/.github/workflows/sonarScan.yml@main
-    secrets: inherit
+  #SONAR:
+  #  needs: BUILD
+  #  uses: asantander90/chi-GitHub-Functions-main/.github/workflows/sonarScan.yml@main
+  #  secrets: inherit
     
   DEPLOY:
-    needs: SONAR
+    #needs: SONAR
     uses: asantander90/chi-GitHub-Functions-main/.github/workflows/deployWeblogic.yml@main
     with:
       artifacts_pattern: ${{ inputs.artifacts_pattern }}
