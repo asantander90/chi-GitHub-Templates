@@ -10,7 +10,7 @@ on:
         type: string
       artifacts_pattern:
         description: "Directorio o expresion regular que describe que se desea almacenar como artefacto"
-        default: "build/ear/*ear"
+        default: "build/*ear"
         required: true
         type: string
       artifacts_name:
