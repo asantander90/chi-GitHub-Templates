@@ -56,17 +56,17 @@ jobs:
   #  uses: asantander90/chi-GitHub-Functions-main/.github/workflows/sonarScan.yml@main
   #  secrets: inherit
     
-  #DEPLOY:
-    #needs: SONAR
-    #uses: asantander90/chi-GitHub-Functions-main/.github/workflows/deployWeblogic.yml@main
-    #with:
-      #artifacts_pattern: ${{ inputs.artifacts_pattern }}
-      #artifact_name: ${{ inputs.artifacts_name }}
-      #server_host: ${{ inputs.server_host }}
-      #server_port: ${{ inputs.server_port }}
-      #weblogic_user: ${{ inputs.weblogic_user }}
-      #target_name: ${{ inputs.target_name }}
-      #app_name: ${{ inputs.app_name }}
-    #secrets: inherit
+  DEPLOY:
+    needs: BUILD
+    uses: asantander90/chi-GitHub-Functions-main/.github/workflows/deployWeblogic.yml@main
+    with:
+      artifacts_pattern: ${{ inputs.artifacts_pattern }}
+      artifact_name: ${{ inputs.artifacts_name }}
+      server_host: ${{ inputs.server_host }}
+      server_port: ${{ inputs.server_port }}
+      weblogic_user: ${{ inputs.weblogic_user }}
+      target_name: ${{ inputs.target_name }}
+      app_name: ${{ inputs.app_name }}
+    secrets: inherit
 
 
