@@ -1,0 +1,41 @@
+name: Template Weblogic
+
+on:
+  workflow_call:
+    inputs:
+      deploy_platform:
+        description: "Plataforma de despliegue"
+        required: true
+        default: "linux"
+        type: string
+      artifacts_pattern:
+        description: "Directorio o expresion regular que describe que se desea almacenar como artefacto"
+        default: "dist/*ear"
+        required: true
+        type: string
+      artifacts_name:
+        required: true
+        type: string
+      java_version:
+        description: "Version de Java del proyecto"
+        required: true
+        default: "11"
+        type: string
+
+jobs:
+  BUILD:
+    uses: santander-group-chile/chi-GitHub-Functions/.github/workflows/buildAnt.yml@main
+    with:
+      java_version: ${{ inputs.java_version }}
+      artifacts_pattern: ${{ inputs.artifacts_pattern }}
+    secrets: inherit
+  SONAR:
+    needs: BUILD
+    uses: santander-group-chile/chi-GitHub-Functions/.github/workflows/sonarScan.yml@main
+    secrets: inherit
+    
+  DEPLOY:
+    needs: SONAR
+    uses: santander-group-chile/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
+
+
